@@ -1,16 +1,13 @@
 import React from 'react';
+import WeatherDisplay from '../../components/WeatherDisplay/WeatherDisplay';
 
-
-//Importamos el estado que queremos usar
-
-const Home = () => {
+const Home: React.FC = () => {
 
     return (
         <div>
-            <h1>Hola, soy el home</h1>
+            <WeatherDisplay />
         </div>
     );
-   
 };
 
 export default Home;
