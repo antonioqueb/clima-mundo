@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import { WiDaySunny, WiNightClear } from "react-icons/wi";
+import { WiNightClear } from "react-icons/wi";
+import { WiDaySunny, WiRain, WiThunderstorm, WiSnow, WiCloudy, WiFog } from "react-icons/wi";
+
 
 interface WeatherData {
   name: string;
@@ -19,6 +21,14 @@ interface WeatherData {
 }
 
 const WeatherDisplay: React.FC = () => {
+  const weatherIcons = {
+        Clear: <WiDaySunny size={60} color="#f8d63c" />,
+        Rain: <WiRain size={60} color="#a4b0be" />,
+        Thunderstorm: <WiThunderstorm size={60} color="#f6c23e" />,
+        Snow: <WiSnow size={60} color="#1abc9c" />,
+        Clouds: <WiCloudy size={60} color="#95a5a6" />,
+        Mist: <WiFog size={60} color="#636e72" />,
+      };
   const [city, setCity] = useState<string>("");
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
@@ -127,7 +137,7 @@ const WeatherDisplay: React.FC = () => {
         )}
       </Col>
     </Row>
-    <footer className="text-center bg-light py-3 mt-auto">
+    <footer className="text-center  py-3 mt-auto">
         <p>
           Creado por <a href="https://github.com/antonioqueb">Antonio Queb</a>
         </p>
