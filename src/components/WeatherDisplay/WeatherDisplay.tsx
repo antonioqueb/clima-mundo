@@ -61,7 +61,7 @@ const WeatherDisplay: React.FC = () => {
     e.preventDefault();
     try {
       const response = await axios.get<WeatherData>(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=da7a6371f2e1edbd76bc0de0c79b7c53&units=metric&lang=es`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=da7a6371f2e1edbd76bc0de0c79b7c53&units=metric&lang=en`
       );
       setWeatherData(response.data);
       setError("");
@@ -87,12 +87,12 @@ const WeatherDisplay: React.FC = () => {
           
           <Form onSubmit={handleSubmit} className="mb-4">
             <Form.Group>
-              <Form.Label className="font-weight-bold">Ingresa tu ciudad...</Form.Label>
+              <Form.Label className="font-weight-bold">Enter your city...</Form.Label>
               <br/>
               
               <Form.Control
                 type="text"
-                placeholder="e.g. Campeche, Mexico"
+                placeholder="e.g. Mérida, Mexico"
                 value={city}
                 onChange={handleCityChange}
               />
@@ -118,13 +118,13 @@ const WeatherDisplay: React.FC = () => {
                     <Col md={6} className="text-center mb-3">
                     <div className="rounded p-3" style={{ backgroundColor: "#fcdd3c" }}>
                         <h1 className="display-3 font-weight-bold">{weatherData.main.temp}°C</h1>
-                        <h4 className="text-secondary mb-0">Temperatura</h4>
+                        <h4 className="text-secondary mb-0">Temperature</h4>
                     </div>
                     </Col>
                     <Col md={6} className="text-center mb-3">
                     <div className="rounded p-3" style={{ backgroundColor: "#f0a8c1" }}>
                         <h1 className="display-3 font-weight-bold">{weatherData.main.humidity}%</h1>
-                        <h4 className="text-secondary mb-0">Humedad</h4>
+                        <h4 className="text-secondary mb-0">Humidity</h4>
                     </div>
                     </Col>
                 </Row>
@@ -139,7 +139,7 @@ const WeatherDisplay: React.FC = () => {
     </Row>
     <footer className="text-center  py-3 mt-auto">
         <p>
-          Creado por <a href="https://github.com/antonioqueb">Antonio Queb</a>
+          By <a href="https://github.com/antonioqueb">Antonio Queb</a>
         </p>
       </footer>
   </Container>
