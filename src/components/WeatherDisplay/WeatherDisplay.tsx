@@ -100,7 +100,7 @@ const WeatherDisplay: React.FC = () => {
             <br/>
            
             <Button variant="primary" type="submit">
-              Descubrir
+            Discover
             </Button>
             <br/>
             <br/>
