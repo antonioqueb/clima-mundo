@@ -82,7 +82,7 @@ const WeatherDisplay: React.FC = () => {
               <WiDaySunny size={150} color="#f8d63c" />
             )}
           </h1>
-          <h1 className="mb-4">ClimaMundo</h1>
+          <h1 className="mb-4">Earth Therm</h1>
           <br/>
           
           <Form onSubmit={handleSubmit} className="mb-4">
