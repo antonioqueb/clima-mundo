@@ -1,0 +1,203 @@
+
+.body {
+    background-size: cover; /* Asegura que la imagen cubra todo el espacio disponible */
+    background-position: center; /* Centra la imagen en el contenedor */
+    min-height: 100vh; /* Altura mínima del 100% de la pantalla */
+    min-width: 10vh;
+    margin: 0; /* Elimina márgenes por defecto */
+    display: flex;
+    justify-content: center;
+  }
+  
+.dark-mode {
+    background-color: #333; /* Fondo más oscuro para el modo nocturno */
+    color: #fff; /* Texto claro para el modo nocturno */
+  }
+
+
+
+.weather-container {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f3f4f687; /* Fondo claro, puedes cambiarlo según la imagen de fondo */
+    max-width: 70%;
+    width: 90%;
+    max-height: 60%;
+    backdrop-filter: blur(10px); /* Filtro de desenfoque aplicado al fondo */
+}
+
+.title-box.dark-mode {
+    color: #fff; /* Texto claro para el modo nocturno */
+
+
+}
+
+
+.weather-container.dark-mode {
+    background-color: #1a1a1a5c; /* Fondo oscuro para el modo nocturno */
+    color: #fff; /* Texto claro para el modo nocturno */
+  }
+.weather-box.dark-mode {
+    background-color: #303136;
+}
+.weather-info.dark-mode {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+}
+.Title {
+    height: 5em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .Title:hover {
+    filter: drop-shadow(0 0 4em #cbde60aa);
+  }
+  .Title.react:hover {
+    filter: drop-shadow(0 0 4em #3ea6c3aa);
+  }
+  
+  .weather-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .weather-col {
+    flex: 1;
+    padding: 10px;
+    max-width: 65%;
+
+    
+
+  }
+  
+  .weather-title {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .weather-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .weather-form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #2a2a2a;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .weather-error {
+    color: #dc3545;
+    margin-top: 10px;
+  }
+  
+  .weather-info {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .weather-details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .weather-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .weather-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    margin-top: 30px;
+  }
+  
+
+
+
+  
+
+
+  /* The switch - the box around the slider */
+.switch {
+    display: block;
+    --width-of-switch: 3.5em;
+    --height-of-switch: 2em;
+    /* size of sliding icon -- sun and moon */
+    --size-of-icon: 1.4em;
+    /* it is like a inline-padding of switch */
+    --slider-offset: 0.3em;
+    position: relative;
+    width: var(--width-of-switch);
+    height: var(--height-of-switch);
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f4f4f5;
+    transition: .4s;
+    border-radius: 30px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--size-of-icon,1.4em);
+    width: var(--size-of-icon,1.4em);
+    border-radius: 20px;
+    left: var(--slider-offset,0.3em);
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+    ;
+   transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #303136;
+  }
+  
+  input:checked + .slider:before {
+    left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+    background: #303136;
+    /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+  }

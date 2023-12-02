@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import { WiNightClear } from "react-icons/wi";
-import { WiDaySunny, WiRain, WiThunderstorm, WiSnow, WiCloudy, WiFog } from "react-icons/wi";
+import { WiNightClear, WiDaySunny, WiRain, WiThunderstorm, WiSnow, WiCloudy, WiFog } from "react-icons/wi";
+import './WeatherDisplay.css';
 
+const unsplashAccessKey = 'fO3fdA1DzFS7KGC8m3j0oess--p20HKnIQC3JQvD2qs'; // Reemplaza con tu clave API de Unsplash
 
 interface WeatherData {
   name: string;
@@ -21,18 +21,16 @@ interface WeatherData {
 }
 
 const WeatherDisplay: React.FC = () => {
-  const weatherIcons = {
-        Clear: <WiDaySunny size={60} color="#f8d63c" />,
-        Rain: <WiRain size={60} color="#a4b0be" />,
-        Thunderstorm: <WiThunderstorm size={60} color="#f6c23e" />,
-        Snow: <WiSnow size={60} color="#1abc9c" />,
-        Clouds: <WiCloudy size={60} color="#95a5a6" />,
-        Mist: <WiFog size={60} color="#636e72" />,
-      };
+  const [darkMode, setDarkMode] = useState<boolean>(false);
   const [city, setCity] = useState<string>("");
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
   const [isNight, setIsNight] = useState<boolean>(false);
+  const [backgroundImage, setBackgroundImage] = useState<string>("defaultBackground.png");
+
+  const toggleDarkMode = () => { // Función para alternar el modo nocturno
+    setDarkMode(!darkMode);
+  };
 
   useEffect(() => {
     const getSunriseAndSunset = async () => {
@@ -53,6 +51,32 @@ const WeatherDisplay: React.FC = () => {
     }
   }, [city]);
 
+  useEffect(() => {
+    const fetchBackgroundImage = async () => {
+      try {
+        // Combina la ciudad con 'day' o 'night' para la búsqueda de imágenes
+        const keyword = `${city} ${isNight ? 'night' : 'day'}`;
+        const response = await axios.get(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(keyword)}&client_id=${unsplashAccessKey}`);
+        
+        // Asegúrate de que hay resultados antes de intentar acceder a ellos
+        if(response.data.results.length > 0) {
+          setBackgroundImage(response.data.results[0].urls.regular);
+        } else {
+          // Puedes establecer una imagen predeterminada en caso de que no haya resultados
+          setBackgroundImage("defaultBackground.png");
+        }
+      } catch (error) {
+        console.error('Error fetching image from Unsplash', error);
+        setBackgroundImage("defaultBackground.png"); // En caso de error, usa una imagen predeterminada
+      }
+    };
+  
+    if (city && weatherData) {
+      fetchBackgroundImage();
+    }
+  }, [weatherData, isNight, city]);
+  
+
   const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
@@ -72,80 +96,73 @@ const WeatherDisplay: React.FC = () => {
   };
 
   return (
-    <Container className="text-center my-5">
-      <Row className="justify-content-center">
-        <Col md={8} lg={6}>
-          <h1 className="mb-4">
-            {isNight ? (
-              <WiNightClear size={150} color="#f8d63c" />
-            ) : (
-              <WiDaySunny size={150} color="#f8d63c" />
-            )}
-          </h1>
-          <h1 className="mb-4">Earth Therm</h1>
-          <br/>
+    <div className={`body ${darkMode ? 'dark-mode' : ''}`} style={{ backgroundImage: `url(${backgroundImage})` }}>
+      
+      <div className={`weather-container ${darkMode ? 'dark-mode' : ''}`}>
+      <label className="switch">
+            <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} />
+            <span className="slider"></span>
+          </label>
+        <div className="weather-row">
           
-          <Form onSubmit={handleSubmit} className="mb-4">
-            <Form.Group>
-              <Form.Label className="font-weight-bold">Enter your city...</Form.Label>
+          <div className="weather-col">
+         
+
+            <h1 className="weather-title">
+              {isNight ? (
+                <WiNightClear size={150} color="#f8d63c" />
+              ) : (
+                <WiDaySunny size={150} color="#f8d63c" />
+              )}
+            </h1>
+            <strong><h1 className="Title">Clima Online</h1></strong>
+            <br/>
+            <form onSubmit={handleSubmit}>
+              <div className="weather-form-group">
+                <br/>
+                <input
+                  type="text"
+                  className="weather-form-control"
+                  placeholder="e.g. Mérida, Mexico"
+                  value={city}
+                  onChange={handleCityChange}
+                />
+              </div>
               <br/>
-              
-              <Form.Control
-                type="text"
-                placeholder="e.g. Mérida, Mexico"
-                value={city}
-                onChange={handleCityChange}
-              />
-            </Form.Group>
-            <br/>
-           
-            <Button variant="primary" type="submit">
-            Discover
-            </Button>
-            <br/>
-            <br/>
-          </Form>
-          {error && <p className="text-danger">{error}</p>}
-          {weatherData && (
-            <div>
-            <h2 className="mt-4 mb-3">{weatherData.name}</h2>
-            <Col className="text-center mb-3">
-                <p className="font-weight-bold">{weatherData.weather[0].description.charAt(0).toUpperCase() + weatherData.weather[0].description.slice(1)}</p>
-
-                </Col>
-                <Container className="my-5">
-                <Row className="justify-content-center">
-                    <Col md={6} className="text-center mb-3">
-                    <div className="rounded p-3" style={{ backgroundColor: "#fcdd3c" }}>
-                        <h1 className="display-3 font-weight-bold">{weatherData.main.temp}°C</h1>
-                        <h4 className="text-secondary mb-0">Temperature</h4>
+              <button type="submit">
+                Discover
+              </button>
+              <br/>
+              <br/>
+            </form>
+            {error && <p className="weather-error">{error}</p>}
+            {weatherData && (
+              <div>
+                <h2>{weatherData.name}</h2>
+                <div className={`weather-info ${darkMode ? 'dark-mode' : ''}`}>
+                  <p>{weatherData.weather[0].description.charAt(0).toUpperCase() + weatherData.weather[0].description.slice(1)}</p>
+                </div>
+                <div className="weather-details">
+                  <div className="weather-col">
+                    <div className={`weather-box ${darkMode ? 'dark-mode' : ''}`}>
+                      <h1>{weatherData.main.temp}°C</h1>
+                      <h4 className="title-box">Temperature</h4>
                     </div>
-                    </Col>
-                    <Col md={6} className="text-center mb-3">
-                    <div className="rounded p-3" style={{ backgroundColor: "#f0a8c1" }}>
-                        <h1 className="display-3 font-weight-bold">{weatherData.main.humidity}%</h1>
-                        <h4 className="text-secondary mb-0">Humidity</h4>
+                  </div>
+                  <div className="weather-col ">
+                  <div className={`weather-box ${darkMode ? 'dark-mode' : ''}`}>
+                      <h1>{weatherData.main.humidity}%</h1>
+                      <h4 className="title-box">Humidity</h4>
                     </div>
-                    </Col>
-                </Row>
-                </Container>
-
-
-
-
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </Col>
-    </Row>
-    <footer className="text-center  py-3 mt-auto">
-        <p>
-          By <a href="https://github.com/antonioqueb">Antonio Queb</a>
-        </p>
-      </footer>
-  </Container>
-  
-);
+        </div>
+      </div>
+      </div>
+  );
 };
 
 export default WeatherDisplay;
-
