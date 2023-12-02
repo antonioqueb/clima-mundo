@@ -201,3 +201,115 @@
     /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
     box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
   }
+
+
+  /* Estilos base ya proporcionados */
+
+/* ... tus estilos actuales ... */
+
+/* Media Queries para dispositivos móviles */
+
+@media screen and (max-width: 768px) {
+    .body {
+        /* Ajustes para el contenedor principal en pantallas pequeñas */
+        min-width: 100vw; /* Asegura que el mínimo ancho sea el de la ventana */
+    }
+
+    .weather-container {
+        /* Ajustes para el contenedor del clima */
+        max-width: 100%; /* Usa todo el ancho disponible */
+        width: auto; /* Permite que el contenedor se ajuste automáticamente */
+        padding: 15px; /* Reducción del padding para pantallas pequeñas */
+    }
+
+    .weather-col {
+        /* Cambios para las columnas dentro del contenedor del clima */
+        max-width: 100%; /* Permite que cada columna use todo el ancho disponible */
+    }
+
+    .weather-details {
+        /* Ajustes para los detalles del clima */
+        flex-direction: column; /* Cambia la dirección de los elementos a columna */
+        margin-top: 15px;
+    }
+
+    .weather-box {
+        /* Ajustes para los boxes individuales del clima */
+        margin-bottom: 20px; /* Añade un margen inferior entre boxes */
+    }
+
+    .weather-title {
+        /* Ajustes para el título */
+        font-size: 1.5rem; /* Reduce el tamaño de fuente para pantallas pequeñas */
+    }
+
+    .weather-info {
+        /* Ajustes para la información del clima */
+        font-size: 1rem; /* Reduce el tamaño de fuente para la información */
+    }
+
+    .Title {
+        /* Ajustes para el título principal */
+        height: auto; /* Altura automática para adaptarse al contenido */
+        padding: 1em; /* Reducción del padding */
+    }
+}
+
+/* Puedes añadir más media queries para otros rangos de tamaño si lo necesitas */
+/* Media Queries para dispositivos con pantalla hasta 420px */
+@media screen and (max-width: 420px) {
+    .body {
+        /* Ajustes adicionales para el cuerpo en pantallas muy pequeñas */
+        padding: 5px; /* Añade un poco de padding para no tocar los bordes */
+    }
+
+    .weather-container {
+        /* Ajustes para el contenedor del clima */
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px; /* Padding más pequeño */
+        border-radius: 5px; /* Radio de borde más pequeño para un aspecto más ajustado */
+    }
+
+    .weather-col {
+        /* Cambios para las columnas dentro del contenedor del clima */
+        padding: 5px; /* Padding reducido */
+    }
+
+    .weather-box {
+        /* Ajustes para los boxes individuales del clima */
+        padding: 10px; /* Padding reducido */
+    }
+
+    .weather-title {
+        /* Ajustes para el título */
+        font-size: 1.2rem; /* Tamaño de fuente más pequeño */
+    }
+
+    .weather-info {
+        /* Ajustes para la información del clima */
+        font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+    }
+
+    .weather-details {
+        /* Ajustes para los detalles del clima */
+        flex-direction: column; /* Mantiene los elementos en columna */
+    }
+
+    .Title {
+        /* Ajustes para el título principal */
+        font-size: 1.4rem; /* Tamaño de fuente reducido */
+    }
+
+    .weather-form-control, button {
+        /* Ajustes para los controles de formulario y botones */
+        font-size: 0.8rem; /* Tamaño de fuente más pequeño */
+    }
+
+    .switch {
+        /* Ajustes para el interruptor del modo oscuro */
+        --width-of-switch: 3em; /* Ancho más pequeño */
+        --height-of-switch: 1.5em; /* Altura más pequeña */
+        --size-of-icon: 1.2em; /* Tamaño de icono más pequeño */
+    }
+}
